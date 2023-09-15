@@ -21,10 +21,7 @@ pipeline {
 		stage("test: baseline (main)") {
 			when {
 				beforeAgent(true)
-				anyOf {
-					branch(pattern: "main|(\\d\\.\\d\\.x)", comparator: "REGEXP")
-					not { triggeredBy 'UpstreamCause' }
-				}
+				branch(pattern: "main|(\\d\\.\\d\\.x)|issue/.+", comparator: "REGEXP")
 			}
 			agent {
 				label 'data'
@@ -48,10 +45,7 @@ pipeline {
 		stage("Test other configurations") {
 			when {
 				beforeAgent(true)
-				allOf {
-					branch(pattern: "main|(\\d\\.\\d\\.x)", comparator: "REGEXP")
-					not { triggeredBy 'UpstreamCause' }
-				}
+				branch(pattern: "main|(\\d\\.\\d\\.x)|issue/.+", comparator: "REGEXP")
 			}
 
 			parallel {
@@ -118,10 +112,7 @@ pipeline {
 		stage('Release to artifactory') {
 			when {
 				beforeAgent(true)
-				anyOf {
-					branch(pattern: "main|(\\d\\.\\d\\.x)", comparator: "REGEXP")
-					not { triggeredBy 'UpstreamCause' }
-				}
+				branch(pattern: "main|(\\d\\.\\d\\.x)|issue/.+", comparator: "REGEXP")
 			}
 			agent {
 				label 'data'
