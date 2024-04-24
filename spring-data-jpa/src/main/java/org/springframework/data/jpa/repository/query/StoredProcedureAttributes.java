@@ -134,8 +134,9 @@ class StoredProcedureAttributes {
 	 */
 	public boolean hasReturnValue() {
 
-		if (getOutputProcedureParameters().isEmpty())
+		if (getOutputProcedureParameters().isEmpty()) {
 			return false;
+		}
 
 		Class<?> outputType = getOutputProcedureParameters().get(0).getType();
 		return !(void.class.equals(outputType) || Void.class.equals(outputType));

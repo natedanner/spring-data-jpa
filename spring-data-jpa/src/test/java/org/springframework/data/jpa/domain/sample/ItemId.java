@@ -54,15 +54,18 @@ public class ItemId implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ItemId))
+		}
+		if (!(o instanceof ItemId)) {
 			return false;
+		}
 
 		ItemId itemId = (ItemId) o;
 
-		if (id != null ? !id.equals(itemId.id) : itemId.id != null)
+		if (id != null ? !id.equals(itemId.id) : itemId.id != null) {
 			return false;
+		}
 		return manufacturerId != null ? manufacturerId.equals(itemId.manufacturerId) : itemId.manufacturerId == null;
 	}
 

@@ -148,7 +148,7 @@ class StoredProcedureIntegrationTests {
 	@Configuration
 	@EnableJpaRepositories(basePackageClasses = DummyRepository.class,
 			includeFilters = { @Filter(pattern = ".*DummyRepository", type = FilterType.REGEX) })
-	static abstract class Config {}
+	abstract static class Config {}
 
 	@ImportResource("classpath:infrastructure.xml")
 	static class TestConfig extends Config {}

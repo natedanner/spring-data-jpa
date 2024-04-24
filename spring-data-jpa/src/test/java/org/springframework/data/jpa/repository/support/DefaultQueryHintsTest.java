@@ -31,8 +31,8 @@ import org.junit.jupiter.api.Test;
  */
 class DefaultQueryHintsTest {
 
-	private JpaEntityInformation<?, ?> information = mock(JpaEntityInformation.class);
-	private CrudMethodMetadata metadata = mock(CrudMethodMetadata.class);
+	private final JpaEntityInformation<?, ?> information = mock(JpaEntityInformation.class);
+	private final CrudMethodMetadata metadata = mock(CrudMethodMetadata.class);
 
 	@BeforeEach
 	void before() {

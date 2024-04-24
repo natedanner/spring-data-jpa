@@ -291,6 +291,7 @@ public class JpaQueryCreator extends AbstractQueryCreator<CriteriaQuery<? extend
 								? isNotMember(builder, parameterExpression, propertyExpression) //
 								: isMember(builder, parameterExpression, propertyExpression);
 					}
+					break;
 
 				case LIKE:
 				case NOT_LIKE:
@@ -360,6 +361,7 @@ public class JpaQueryCreator extends AbstractQueryCreator<CriteriaQuery<? extend
 					if (canUpperCase(expression)) {
 						return (Expression<T>) builder.upper((Expression<String>) expression);
 					}
+					break;
 
 				case NEVER:
 				default:

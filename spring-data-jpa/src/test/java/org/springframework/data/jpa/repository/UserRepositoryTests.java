@@ -2799,9 +2799,8 @@ class UserRepositoryTests {
 			}
 		}
 
-		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> {
-			repository.findBy(userHasFirstnameLike("v"), q -> q.as(UserDto.class).sortBy(Sort.by("firstname")).all());
-		});
+		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() ->
+			repository.findBy(userHasFirstnameLike("v"), q -> q.as(UserDto.class).sortBy(Sort.by("firstname")).all()));
 	}
 
 	@Test // GH-2274

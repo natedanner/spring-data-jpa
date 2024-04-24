@@ -190,9 +190,9 @@ class SpecificationUnitTests implements Serializable {
 		Predicate firstPredicate = mock(Predicate.class);
 		Predicate secondPredicate = mock(Predicate.class);
 
-		Specification<Object> first = ((root1, query1, criteriaBuilder) -> firstPredicate);
+		Specification<Object> first = (root1, query1, criteriaBuilder) -> firstPredicate;
 
-		Specification<Object> second = ((root1, query1, criteriaBuilder) -> secondPredicate);
+		Specification<Object> second = (root1, query1, criteriaBuilder) -> secondPredicate;
 
 		first.and(second).toPredicate(root, query, builder);
 
@@ -205,9 +205,9 @@ class SpecificationUnitTests implements Serializable {
 		Predicate firstPredicate = mock(Predicate.class);
 		Predicate secondPredicate = mock(Predicate.class);
 
-		Specification<Object> first = ((root1, query1, criteriaBuilder) -> firstPredicate);
+		Specification<Object> first = (root1, query1, criteriaBuilder) -> firstPredicate;
 
-		Specification<Object> second = ((root1, query1, criteriaBuilder) -> secondPredicate);
+		Specification<Object> second = (root1, query1, criteriaBuilder) -> secondPredicate;
 
 		first.or(second).toPredicate(root, query, builder);
 

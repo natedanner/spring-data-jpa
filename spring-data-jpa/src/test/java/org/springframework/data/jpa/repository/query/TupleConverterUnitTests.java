@@ -158,7 +158,7 @@ class TupleConverterUnitTests {
 			return Arrays.asList(one, two);
 		}
 
-		private static class StringTupleElement implements TupleElement<String> {
+		private static final class StringTupleElement implements TupleElement<String> {
 
 			private final String value;
 

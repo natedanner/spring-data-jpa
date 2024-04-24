@@ -18,8 +18,8 @@ package org.springframework.data.jpa.repository.sample;
 // DATAJPA-1334
 class NameOnlyDto {
 
-	private String firstname;
-	private String lastname;
+	private final String firstname;
+	private final String lastname;
 
 	public NameOnlyDto(String firstname, String lastname) {
 		this.firstname = firstname;

@@ -220,7 +220,7 @@ interface QueryParameterSetter {
 			// parameters in the query.
 			// https://bugs.eclipse.org/bugs/show_bug.cgi?id=521915
 
-			this.registerExcessParameters = query.getParameters().size() == 0
+			this.registerExcessParameters = query.getParameters().isEmpty()
 					&& unwrapClass(query).getName().startsWith("org.eclipse");
 		}
 

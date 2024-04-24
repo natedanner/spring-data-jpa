@@ -199,14 +199,14 @@ class AbstractStringBasedJpaQueryUnitTests {
 
 		public Times called(String method) {
 
-			return (invocationCount -> {
+			return invocationCount -> {
 
 				int actualCount = getInvocationCount(method);
 				Assertions.assertThat(actualCount)
 						.withFailMessage(
 								() -> "Expected %d invocations for %s, but recorded %d".formatted(invocationCount, method, actualCount))
 						.isEqualTo(invocationCount);
-			});
+			};
 		}
 
 		static class Arguments {

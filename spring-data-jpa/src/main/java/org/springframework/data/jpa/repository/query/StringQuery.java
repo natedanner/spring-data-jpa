@@ -205,7 +205,7 @@ class StringQuery implements DeclaredQuery {
 			builder.append("(?: )?"); // some whitespace
 			builder.append("\\(?"); // optional braces around parameters
 			builder.append("(");
-			builder.append("%?(" + POSITIONAL_OR_INDEXED_PARAMETER + ")%?"); // position parameter and parameter index
+			builder.append("%?(").append(POSITIONAL_OR_INDEXED_PARAMETER).append(")%?"); // position parameter and parameter index
 			builder.append("|"); // or
 
 			// named parameter and the parameter name
@@ -301,16 +301,16 @@ class StringQuery implements DeclaredQuery {
 					case LIKE:
 
 						Type likeType = LikeParameterBinding.getLikeTypeFrom(matcher.group(2));
-						bindingFactory = (identifier) -> new LikeParameterBinding(identifier, origin, likeType);
+						bindingFactory = identifier -> new LikeParameterBinding(identifier, origin, likeType);
 						break;
 
 					case IN:
-						bindingFactory = (identifier) -> new InParameterBinding(identifier, origin);
+						bindingFactory = identifier -> new InParameterBinding(identifier, origin);
 						break;
 
 					case AS_IS: // fall-through we don't need a special parameter queryParameter for the given parameter.
 					default:
-						bindingFactory = (identifier) -> new ParameterBinding(identifier, origin);
+						bindingFactory = identifier -> new ParameterBinding(identifier, origin);
 				}
 
 				if (origin.isExpression()) {
@@ -320,7 +320,7 @@ class StringQuery implements DeclaredQuery {
 				}
 
 				replacement = targetBinding.hasName() ? ":" + targetBinding.getName()
-						: ((!usesJpaStyleParameters && queryMeta.usesJdbcStyleParameters) ? "?"
+						: (!usesJpaStyleParameters && queryMeta.usesJdbcStyleParameters ? "?"
 								: "?" + targetBinding.getPosition());
 				String result;
 				String substring = matcher.group(2);
@@ -448,7 +448,7 @@ class StringQuery implements DeclaredQuery {
 	}
 
 	private static class Metadata {
-		private boolean usesJdbcStyleParameters = false;
+		private boolean usesJdbcStyleParameters;
 	}
 
 	/**

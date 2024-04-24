@@ -140,11 +140,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.identificationVariableDeclarationOrCollectionMemberDeclaration()
 				.forEach(identificationVariableDeclarationOrCollectionMemberDeclarationContext -> {
-					NOSPACE(tokens);
+					nOSPACE(tokens);
 					tokens.add(TOKEN_COMMA);
 					tokens.addAll(visit(identificationVariableDeclarationOrCollectionMemberDeclarationContext));
 				});
-		SPACE(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -162,7 +162,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			List<JpaQueryParsingToken> tokens = new ArrayList<>();
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 			tokens.addAll(visit(ctx.identification_variable()));
 
@@ -180,12 +180,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.addAll(visit(ctx.range_variable_declaration()));
 
-		ctx.join().forEach(joinContext -> {
-			tokens.addAll(visit(joinContext));
-		});
-		ctx.fetch_join().forEach(fetchJoinContext -> {
-			tokens.addAll(visit(fetchJoinContext));
-		});
+		ctx.join().forEach(joinContext ->
+			tokens.addAll(visit(joinContext)));
+		ctx.fetch_join().forEach(fetchJoinContext ->
+			tokens.addAll(visit(fetchJoinContext)));
 
 		return tokens;
 	}
@@ -305,7 +303,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 				tokens.addAll(visit(ctx.join_collection_valued_path_expression()));
 				tokens.add(new JpaQueryParsingToken(ctx.AS()));
 				tokens.addAll(visit(ctx.subtype()));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_CLOSE_PAREN);
 			} else if (ctx.join_single_valued_path_expression() != null) {
 
@@ -314,7 +312,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 				tokens.addAll(visit(ctx.join_single_valued_path_expression()));
 				tokens.add(new JpaQueryParsingToken(ctx.AS()));
 				tokens.addAll(visit(ctx.subtype()));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_CLOSE_PAREN);
 			}
 		}
@@ -331,13 +329,13 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		if (ctx.identification_variable() != null) {
 
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		}
 
 		ctx.single_valued_embeddable_object_field().forEach(singleValuedEmbeddableObjectFieldContext -> {
 			tokens.addAll(visit(singleValuedEmbeddableObjectFieldContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		});
 
@@ -377,7 +375,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.IN(), false));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.collection_valued_path_expression()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		if (ctx.AS() != null) {
@@ -419,14 +417,14 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.add(new JpaQueryParsingToken(ctx.KEY(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.VALUE() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.VALUE(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -499,14 +497,14 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.general_identification_variable()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 
 		ctx.single_valued_object_field().forEach(singleValuedObjectFieldContext -> {
 			tokens.add(TOKEN_DOT);
 			tokens.addAll(visit(singleValuedObjectFieldContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 		});
-		SPACE(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -519,10 +517,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.TREAT(), false));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.general_subpath()));
-		SPACE(tokens);
+		sPACE(tokens);
 		tokens.add(new JpaQueryParsingToken(ctx.AS()));
 		tokens.addAll(visit(ctx.subtype()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -534,7 +532,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.general_subpath()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_DOT);
 		tokens.addAll(visit(ctx.state_field()));
 
@@ -563,7 +561,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.general_subpath()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_DOT);
 		tokens.addAll(visit(ctx.single_valued_object_field()));
 
@@ -577,7 +575,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.general_subpath()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_DOT);
 		tokens.addAll(visit(ctx.collection_value_field()));
 
@@ -603,11 +601,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.update_item().forEach(updateItemContext -> {
 			tokens.addAll(visit(updateItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -619,13 +617,13 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		if (ctx.identification_variable() != null) {
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		}
 
 		ctx.single_valued_embeddable_object_field().forEach(singleValuedEmbeddableObjectFieldContext -> {
 			tokens.addAll(visit(singleValuedEmbeddableObjectFieldContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		});
 
@@ -686,11 +684,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.select_item().forEach(selectItemContext -> {
 			tokens.addAll(visit(selectItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -701,7 +699,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.select_expression()));
-		SPACE(tokens);
+		sPACE(tokens);
 
 		if (ctx.AS() != null) {
 			tokens.add(new JpaQueryParsingToken(ctx.AS()));
@@ -734,7 +732,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 				tokens.add(new JpaQueryParsingToken(ctx.OBJECT(), false));
 				tokens.add(TOKEN_OPEN_PAREN);
 				tokens.addAll(visit(ctx.identification_variable()));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_CLOSE_PAREN);
 
 				return tokens;
@@ -757,10 +755,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.constructor_item().forEach(constructorItemContext -> {
 			tokens.addAll(visit(constructorItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		tokens.add(TOKEN_CLOSE_PAREN);
 
@@ -812,7 +810,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			}
 
 			tokens.addAll(visit(ctx.state_valued_path_expression()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.COUNT() != null) {
 
@@ -828,7 +826,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			} else if (ctx.single_valued_object_path_expression() != null) {
 				tokens.addAll(visit(ctx.single_valued_object_path_expression()));
 			}
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.function_invocation() != null) {
 			tokens.addAll(visit(ctx.function_invocation()));
@@ -857,11 +855,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.BY()));
 		ctx.groupby_item().forEach(groupbyItemContext -> {
 			tokens.addAll(visit(groupbyItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -903,10 +901,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.orderby_item().forEach(orderbyItemContext -> {
 			tokens.addAll(visit(orderbyItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -986,11 +984,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.FROM()));
 		ctx.subselect_identification_variable_declaration().forEach(subselectIdentificationVariableDeclarationContext -> {
 			tokens.addAll(visit(subselectIdentificationVariableDeclarationContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -1142,7 +1140,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.conditional_expression()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1248,17 +1246,17 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			ctx.in_item().forEach(inItemContext -> {
 
 				tokens.addAll(visit(inItemContext));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
+			cLIP(tokens);
 
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.subquery() != null) {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.collection_valued_input_parameter() != null) {
 			tokens.addAll(visit(ctx.collection_valued_input_parameter()));
@@ -1407,7 +1405,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.EXISTS()));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.subquery()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1428,7 +1426,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.subquery()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1596,7 +1594,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		if (ctx.arithmetic_term() != null) {
 
 			tokens.addAll(visit(ctx.arithmetic_term()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(new JpaQueryParsingToken(ctx.op, false));
 			tokens.addAll(visit(ctx.arithmetic_factor()));
 		} else {
@@ -1632,7 +1630,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.input_parameter() != null) {
 			tokens.addAll(visit(ctx.input_parameter()));
@@ -1650,7 +1648,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1680,7 +1678,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1712,7 +1710,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1738,7 +1736,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1762,7 +1760,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -1828,7 +1826,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		} else if (ctx.input_parameter() != null) {
 			tokens.addAll(visit(ctx.input_parameter()));
 		}
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1845,21 +1843,21 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.add(new JpaQueryParsingToken(ctx.LENGTH(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.LOCATE() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.LOCATE(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 			tokens.addAll(visit(ctx.string_expression(1)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			if (ctx.arithmetic_expression() != null) {
 				tokens.add(TOKEN_COMMA);
 				tokens.addAll(visit(ctx.arithmetic_expression(0)));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 			}
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.ABS() != null) {
@@ -1867,93 +1865,93 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.add(new JpaQueryParsingToken(ctx.ABS(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.CEILING() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.CEILING(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.EXP() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.EXP(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.FLOOR() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.FLOOR(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.LN() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.LN(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.SIGN() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.SIGN(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.SQRT() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.SQRT(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.MOD() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.MOD(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 			tokens.addAll(visit(ctx.arithmetic_expression(1)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.POWER() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.POWER(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 			tokens.addAll(visit(ctx.arithmetic_expression(1)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.ROUND() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.ROUND(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.arithmetic_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 			tokens.addAll(visit(ctx.arithmetic_expression(1)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.SIZE() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.SIZE(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.collection_valued_path_expression()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.INDEX() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.INDEX(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.extract_datetime_field() != null) {
 			tokens.addAll(visit(ctx.extract_datetime_field()));
@@ -2003,25 +2001,25 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.add(TOKEN_OPEN_PAREN);
 			ctx.string_expression().forEach(stringExpressionContext -> {
 				tokens.addAll(visit(stringExpressionContext));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
-			NOSPACE(tokens);
+			cLIP(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.SUBSTRING() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.SUBSTRING(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 			ctx.arithmetic_expression().forEach(arithmeticExpressionContext -> {
 				tokens.addAll(visit(arithmeticExpressionContext));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
+			cLIP(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.TRIM() != null) {
 
@@ -2037,21 +2035,21 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 				tokens.add(new JpaQueryParsingToken(ctx.FROM()));
 			}
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.LOWER() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.LOWER(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.UPPER() != null) {
 
 			tokens.add(new JpaQueryParsingToken(ctx.UPPER(), false));
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.string_expression(0)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
 
@@ -2079,20 +2077,20 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.single_valued_path_expression()));
 		tokens.addAll(visit(ctx.identification_variable()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 
 		if (ctx.numeric_literal() != null) {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			ctx.numeric_literal().forEach(numericLiteralContext -> {
 				tokens.addAll(visit(numericLiteralContext));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
+			cLIP(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2108,17 +2106,17 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		} else if (ctx.identification_variable() != null) {
 
 			tokens.addAll(visit(ctx.identification_variable()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 		}
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.function_name()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		ctx.function_arg().forEach(functionArgContext -> {
 			tokens.add(TOKEN_COMMA);
 			tokens.addAll(visit(functionArgContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 		});
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2134,7 +2132,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.addAll(visit(ctx.datetime_field()));
 		tokens.add(new JpaQueryParsingToken(ctx.FROM()));
 		tokens.addAll(visit(ctx.datetime_expression()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2155,7 +2153,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.addAll(visit(ctx.datetime_part()));
 		tokens.add(new JpaQueryParsingToken(ctx.FROM()));
 		tokens.addAll(visit(ctx.datetime_expression()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2201,9 +2199,8 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(new JpaQueryParsingToken(ctx.CASE()));
 
-		ctx.when_clause().forEach(whenClauseContext -> {
-			tokens.addAll(visit(whenClauseContext));
-		});
+		ctx.when_clause().forEach(whenClauseContext ->
+			tokens.addAll(visit(whenClauseContext)));
 
 		tokens.add(new JpaQueryParsingToken(ctx.ELSE()));
 		tokens.addAll(visit(ctx.scalar_expression()));
@@ -2233,9 +2230,8 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.CASE()));
 		tokens.addAll(visit(ctx.case_operand()));
 
-		ctx.simple_when_clause().forEach(simpleWhenClauseContext -> {
-			tokens.addAll(visit(simpleWhenClauseContext));
-		});
+		ctx.simple_when_clause().forEach(simpleWhenClauseContext ->
+			tokens.addAll(visit(simpleWhenClauseContext)));
 
 		tokens.add(new JpaQueryParsingToken(ctx.ELSE()));
 		tokens.addAll(visit(ctx.scalar_expression()));
@@ -2276,10 +2272,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(TOKEN_OPEN_PAREN);
 		ctx.scalar_expression().forEach(scalarExpressionContext -> {
 			tokens.addAll(visit(scalarExpressionContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2293,10 +2289,10 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.NULLIF(), false));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.scalar_expression(0)));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_COMMA);
 		tokens.addAll(visit(ctx.scalar_expression(1)));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2332,7 +2328,7 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.state_field_path_expression()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 
 		return tokens;
 	}
@@ -2494,11 +2490,11 @@ class EqlQueryRenderer extends EqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.identification_variable().forEach(identificationVariableContext -> {
 			tokens.addAll(visit(identificationVariableContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}

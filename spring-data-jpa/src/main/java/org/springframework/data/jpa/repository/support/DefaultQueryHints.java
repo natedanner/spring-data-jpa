@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
  * @author Jens Schauder
  * @since 2.0
  */
-class DefaultQueryHints implements QueryHints {
+final class DefaultQueryHints implements QueryHints {
 
 	private final JpaEntityInformation<?, ?> information;
 	private final CrudMethodMetadata metadata;

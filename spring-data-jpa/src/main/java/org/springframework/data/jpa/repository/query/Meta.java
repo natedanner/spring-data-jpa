@@ -100,7 +100,7 @@ public class Meta {
 
 		Assert.hasText(key, "Meta key must not be 'null' or blank");
 
-		if (values == Collections.EMPTY_MAP) {
+		if (values == Collections.emptyMap()) {
 			values = new LinkedHashMap<>(2);
 		}
 

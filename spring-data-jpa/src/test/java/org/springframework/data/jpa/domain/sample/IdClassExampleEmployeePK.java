@@ -73,9 +73,6 @@ public class IdClassExampleEmployeePK implements Serializable {
 		if (department != other.department) {
 			return false;
 		}
-		if (empId != other.empId) {
-			return false;
-		}
-		return true;
+		return !(empId != other.empId);
 	}
 }

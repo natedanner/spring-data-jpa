@@ -57,7 +57,10 @@ class JpaMetamodelEntityInformationUnitTests {
 	@Mock Metamodel metamodel;
 
 	@Mock IdentifiableType<PersistableWithIdClass> type;
-	@Mock SingularAttribute<PersistableWithIdClass, ?> first, second;
+	@Mock
+	SingularAttribute<PersistableWithIdClass, ?> first;
+	@Mock
+	SingularAttribute<PersistableWithIdClass, ?> second;
 
 	@Mock
 	@SuppressWarnings("rawtypes") Type idType;

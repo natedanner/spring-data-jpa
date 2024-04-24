@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
 class CdiExtensionIntegrationTests {
 
 	private static SeContainer container;
-	private static Log LOGGER = LogFactory.getLog(CdiExtensionIntegrationTests.class);
+	private static final Log LOGGER = LogFactory.getLog(CdiExtensionIntegrationTests.class);
 
 	@BeforeAll
 	static void setUpCdi() {

@@ -51,7 +51,7 @@ public abstract class HibernateUtils {
 
 				String hql = sqmQuery.getQueryString();
 
-				if (!hql.equals("<criteria>")) {
+				if (!"<criteria>".equals(hql)) {
 					return hql;
 				}
 

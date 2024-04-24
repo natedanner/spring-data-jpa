@@ -36,7 +36,7 @@ import org.springframework.lang.Nullable;
  */
 public class JpaCountQueryCreator extends JpaQueryCreator {
 
-	private boolean distinct;
+	private final boolean distinct;
 
 	/**
 	 * Creates a new {@link JpaCountQueryCreator}.

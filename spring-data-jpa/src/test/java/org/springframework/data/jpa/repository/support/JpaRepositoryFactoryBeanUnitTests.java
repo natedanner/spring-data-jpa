@@ -125,7 +125,7 @@ class JpaRepositoryFactoryBeanUnitTests {
 	 * @author Oliver Gierke
 	 */
 	@SuppressWarnings("serial")
-	private static abstract class User implements Persistable<Long> {
+	private abstract static class User implements Persistable<Long> {
 
 	}
 
@@ -133,7 +133,7 @@ class JpaRepositoryFactoryBeanUnitTests {
 	 * required to trick Mockito on invoking protected getRepository(Class<T> repositoryInterface, Optional<Object>
 	 * customImplementation
 	 */
-	private static class StubRepositoryFactorySupport extends RepositoryFactorySupport {
+	private static final class StubRepositoryFactorySupport extends RepositoryFactorySupport {
 
 		private final Repository<?, ?> repository;
 

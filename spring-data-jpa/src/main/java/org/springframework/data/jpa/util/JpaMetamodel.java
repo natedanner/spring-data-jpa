@@ -15,11 +15,7 @@
  */
 package org.springframework.data.jpa.util;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import jakarta.persistence.Embeddable;
@@ -41,14 +37,14 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @author Sylvère Richard
  */
-public class JpaMetamodel {
+public final class JpaMetamodel {
 
 	private static final Map<Metamodel, JpaMetamodel> CACHE = new ConcurrentHashMap<>(4);
 
 	private final Metamodel metamodel;
 
-	private Lazy<Collection<Class<?>>> managedTypes;
-	private Lazy<Collection<Class<?>>> jpaEmbeddables;
+	private final Lazy<Collection<Class<?>>> managedTypes;
+	private final Lazy<Collection<Class<?>>> jpaEmbeddables;
 
 	/**
 	 * Creates a new {@link JpaMetamodel} for the given JPA {@link Metamodel}.
@@ -63,12 +59,12 @@ public class JpaMetamodel {
 
 		this.managedTypes = Lazy.of(() -> metamodel.getManagedTypes().stream() //
 				.map(ManagedType::getJavaType) //
-				.filter(it -> it != null) //
+				.filter(Objects::nonNull) //
 				.collect(StreamUtils.toUnmodifiableSet()));
 
 		this.jpaEmbeddables = Lazy.of(() -> metamodel.getEmbeddables().stream() //
 				.map(ManagedType::getJavaType)
-				.filter(it -> it != null)
+				.filter(Objects::nonNull)
 				.filter(it -> AnnotatedElementUtils.isAnnotated(it, Embeddable.class))
 				.collect(StreamUtils.toUnmodifiableSet()));
 	}

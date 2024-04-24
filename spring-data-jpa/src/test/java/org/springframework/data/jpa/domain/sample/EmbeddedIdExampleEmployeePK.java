@@ -65,17 +65,19 @@ public class EmbeddedIdExampleEmployeePK implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		EmbeddedIdExampleEmployeePK other = (EmbeddedIdExampleEmployeePK) obj;
-		if (departmentId != other.departmentId)
+		if (departmentId != other.departmentId) {
 			return false;
-		if (employeeId != other.employeeId)
-			return false;
-		return true;
+		}
+		return !(employeeId != other.employeeId);
 	}
 }

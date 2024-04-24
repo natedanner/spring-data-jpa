@@ -318,7 +318,7 @@ public class JpaRepositoryFactory extends RepositoryFactorySupport {
 
 		private final JpaMetamodel metamodel;
 
-		private boolean warningLogged = false;
+		private boolean warningLogged;
 
 		/**
 		 * Creates a new {@link EclipseLinkProjectionQueryCreationListener} for the given {@link EntityManager}.

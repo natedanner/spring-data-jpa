@@ -39,12 +39,12 @@ class JpqlQueryTransformer extends JpqlQueryRenderer {
 
 	private final @Nullable String countProjection;
 
-	private @Nullable String primaryFromAlias = null;
+	private @Nullable String primaryFromAlias;
 
 	private List<JpaQueryParsingToken> projection = Collections.emptyList();
 	private boolean projectionProcessed;
 
-	private boolean hasConstructorExpression = false;
+	private boolean hasConstructorExpression;
 
 	private JpaQueryTransformerSupport transformerSupport;
 
@@ -113,11 +113,11 @@ class JpqlQueryTransformer extends JpqlQueryRenderer {
 
 				if (ctx.orderby_clause() != null) {
 
-					NOSPACE(tokens);
+					nOSPACE(tokens);
 					tokens.add(TOKEN_COMMA);
 				} else {
 
-					SPACE(tokens);
+					sPACE(tokens);
 					tokens.add(TOKEN_ORDER_BY);
 				}
 
@@ -147,11 +147,11 @@ class JpqlQueryTransformer extends JpqlQueryRenderer {
 
 		ctx.select_item().forEach(selectItemContext -> {
 			selectItemTokens.addAll(visit(selectItemContext));
-			NOSPACE(selectItemTokens);
+			nOSPACE(selectItemTokens);
 			selectItemTokens.add(TOKEN_COMMA);
 		});
-		CLIP(selectItemTokens);
-		SPACE(selectItemTokens);
+		cLIP(selectItemTokens);
+		sPACE(selectItemTokens);
 
 		if (countQuery) {
 
@@ -173,7 +173,7 @@ class JpqlQueryTransformer extends JpqlQueryRenderer {
 				}
 			}
 
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else {
 			tokens.addAll(selectItemTokens);

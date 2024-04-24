@@ -107,7 +107,7 @@ class JpaPersistentPropertyImpl extends AnnotationBasedPersistentProperty<JpaPer
 		this.associationTargetType = detectAssociationTargetType();
 		this.updateable = detectUpdatability();
 
-		this.isIdProperty = Lazy.of(() -> ID_ANNOTATIONS.stream().anyMatch(it -> isAnnotationPresent(it)) //
+		this.isIdProperty = Lazy.of(() -> ID_ANNOTATIONS.stream().anyMatch(this::isAnnotationPresent) //
 				|| metamodel.isSingleIdAttribute(getOwner().getType(), getName(), getType()));
 		this.isEntity = Lazy.of(() -> metamodel.isMappedType(getActualType()));
 	}

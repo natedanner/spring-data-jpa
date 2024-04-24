@@ -1451,7 +1451,7 @@ class HqlQueryRendererTests {
 	@Test // GH-2962
 	void orderByWithNullsFirstOrLastShouldWork() {
 
-		assertThatNoException().isThrownBy(() -> {
+		assertThatNoException().isThrownBy(() ->
 			parseWithoutChanges("""
 					select a,
 						case
@@ -1460,10 +1460,9 @@ class HqlQueryRendererTests {
 					from Element a
 					where a.erstelltDurch = :variable
 					order by mutationAm desc nulls first
-					""");
-		});
+					"""));
 
-		assertThatNoException().isThrownBy(() -> {
+		assertThatNoException().isThrownBy(() ->
 			parseWithoutChanges("""
 						select a,
 							case
@@ -1472,21 +1471,19 @@ class HqlQueryRendererTests {
 						from Element a
 						where a.erstelltDurch = :variable
 						order by mutationAm desc nulls last
-					""");
-		});
+					"""));
 	}
 
 	@Test // GH-2964
 	void roundFunctionShouldWorkLikeAnyOtherFunction() {
 
-		assertThatNoException().isThrownBy(() -> {
+		assertThatNoException().isThrownBy(() ->
 			parseWithoutChanges("""
 					select round(count(ri) * 100 / max(ri.receipt.positions), 0) as perc
 					from StockOrderItem oi
 					right join StockReceiptItem ri
 					on ri.article = oi.article
-					""");
-		});
+					"""));
 	}
 
 	@Test // GH-2981

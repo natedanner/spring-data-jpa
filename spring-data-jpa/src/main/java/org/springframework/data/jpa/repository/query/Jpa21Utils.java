@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
  * @author Jens Schauder
  * @since 1.6
  */
-public class Jpa21Utils {
+public final class Jpa21Utils {
 
 	private static final @Nullable Method GET_ENTITY_GRAPH_METHOD;
 	private static final boolean JPA21_AVAILABLE = ClassUtils.isPresent("jakarta.persistence.NamedEntityGraph",

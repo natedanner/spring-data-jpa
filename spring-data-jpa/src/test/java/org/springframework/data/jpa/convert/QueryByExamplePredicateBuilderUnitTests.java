@@ -69,7 +69,14 @@ class QueryByExamplePredicateBuilderUnitTests {
 	@Mock EntityType<Person> personEntityType;
 	@Mock EntityType<Skill> skillEntityType;
 	@Mock Expression expressionMock;
-	@Mock Predicate truePredicate, dummyPredicate, andPredicate, orPredicate;
+	@Mock
+	Predicate truePredicate;
+	@Mock
+	Predicate dummyPredicate;
+	@Mock
+	Predicate andPredicate;
+	@Mock
+	Predicate orPredicate;
 	@Mock Path dummyPath;
 	@Mock Join from;
 

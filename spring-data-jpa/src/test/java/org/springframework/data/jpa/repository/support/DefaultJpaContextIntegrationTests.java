@@ -65,7 +65,7 @@ class DefaultJpaContextIntegrationTests {
 		secondEmf = createEntityManagerFactory("querydsl");
 	}
 
-	private static final LocalContainerEntityManagerFactoryBean createEntityManagerFactoryBean(
+	private static LocalContainerEntityManagerFactoryBean createEntityManagerFactoryBean(
 			String persistenceUnitName) {
 
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -77,7 +77,7 @@ class DefaultJpaContextIntegrationTests {
 		return factoryBean;
 	}
 
-	private static final EntityManagerFactory createEntityManagerFactory(String persistenceUnitName) {
+	private static EntityManagerFactory createEntityManagerFactory(String persistenceUnitName) {
 
 		LocalContainerEntityManagerFactoryBean factoryBean = createEntityManagerFactoryBean(persistenceUnitName);
 		factoryBean.afterPropertiesSet();

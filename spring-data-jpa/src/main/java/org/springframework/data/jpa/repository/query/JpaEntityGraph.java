@@ -33,7 +33,7 @@ import org.springframework.util.StringUtils;
  */
 public class JpaEntityGraph {
 
-	private static String[] EMPTY_ATTRIBUTE_PATHS = {};
+	private static String[] emptyAttributePaths = {};
 
 	private final String name;
 	private final EntityGraphType type;
@@ -65,7 +65,7 @@ public class JpaEntityGraph {
 
 		this.name = name;
 		this.type = type;
-		this.attributePaths = Arrays.asList(attributePaths == null ? EMPTY_ATTRIBUTE_PATHS : attributePaths);
+		this.attributePaths = Arrays.asList(attributePaths == null ? emptyAttributePaths : attributePaths);
 	}
 
 	/**

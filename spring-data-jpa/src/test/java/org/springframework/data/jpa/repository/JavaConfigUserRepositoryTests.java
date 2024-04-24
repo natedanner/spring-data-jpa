@@ -104,7 +104,6 @@ class JavaConfigUserRepositoryTests extends UserRepositoryTests {
 		try (ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(JpaRepositoryConfig.class)) {
 			Assertions.assertThatExceptionOfType(NoSuchBeanDefinitionException.class)
 					.isThrownBy(() -> context.getBean("jpaRepository"));
-			context.close();
 		}
 	}
 

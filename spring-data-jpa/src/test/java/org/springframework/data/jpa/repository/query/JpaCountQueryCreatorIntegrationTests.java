@@ -71,7 +71,7 @@ class JpaCountQueryCreatorIntegrationTests {
 
 		TypedQuery<? extends Object> query = entityManager.createQuery(creator.createQuery());
 
-		SqmQuery sqmQuery = ((SqmQuery) query);
+		SqmQuery sqmQuery = (SqmQuery) query;
 		SqmSelectStatement<?> select = (SqmSelectStatement<?>) sqmQuery.getSqmStatement();
 
 		// Verify distinct (should this even be there for a count query?)
@@ -79,7 +79,7 @@ class JpaCountQueryCreatorIntegrationTests {
 		assertThat(clause.isDistinct()).isTrue();
 
 		// Verify count(distinct(…))
-		SqmFunction<?> function = ((SqmFunction<?>) clause.getSelectionItems().get(0));
+		SqmFunction<?> function = (SqmFunction<?>) clause.getSelectionItems().get(0);
 		assertThat(function.getFunctionName()).isEqualTo("count");
 		assertThat(function.getArguments().get(0)).isInstanceOf(SqmDistinct.class);
 	}

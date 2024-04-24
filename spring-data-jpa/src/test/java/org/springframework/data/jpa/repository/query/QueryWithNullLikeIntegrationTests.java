@@ -74,195 +74,195 @@ class QueryWithNullLikeIntegrationTests {
 	@Test
 	void customQueryWithMultipleMatch() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParam("Baggins");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParam("Baggins");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void customQueryWithSingleMatch() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParam("Frodo");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParam("Frodo");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
 	}
 
 	@Test
 	void customQueryWithEmptyStringMatch() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParam("");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParam("");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void customQueryWithNullMatch() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParam(null);
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParam(null);
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test // GH-2939
 	void customQueryWithMultipleMatchInNative() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParamInNative("Baggins");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParamInNative("Baggins");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test // GH-2939
 	void customQueryWithSingleMatchInNative() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParamInNative("Frodo");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParamInNative("Frodo");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
 	}
 
 	@Test
 	void customQueryWithEmptyStringMatchInNative() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParamInNative("");
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParamInNative("");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test // GH-2939
 	void customQueryWithNullMatchInNative() {
 
-		List<EmployeeWithName> Employees = repository.customQueryWithNullableParamInNative(null);
+		List<EmployeeWithName> employees = repository.customQueryWithNullableParamInNative(null);
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryStartsWithSingleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameStartsWith("Frodo");
+		List<EmployeeWithName> employees = repository.findByNameStartsWith("Frodo");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins");
 	}
 
 	@Test
 	void derivedQueryStartsWithNoMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameStartsWith("Baggins");
+		List<EmployeeWithName> employees = repository.findByNameStartsWith("Baggins");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryStartsWithWithEmptyStringMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameStartsWith("");
+		List<EmployeeWithName> employees = repository.findByNameStartsWith("");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryStartsWithWithNullMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameStartsWith(null);
+		List<EmployeeWithName> employees = repository.findByNameStartsWith(null);
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryEndsWithWithMultipleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameEndsWith("Baggins");
+		List<EmployeeWithName> employees = repository.findByNameEndsWith("Baggins");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryEndsWithWithSingleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameEndsWith("Frodo");
+		List<EmployeeWithName> employees = repository.findByNameEndsWith("Frodo");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryEndsWithWithEmptyStringMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameEndsWith("");
+		List<EmployeeWithName> employees = repository.findByNameEndsWith("");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryEndsWithWithNullMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameEndsWith(null);
+		List<EmployeeWithName> employees = repository.findByNameEndsWith(null);
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryContainsWithMultipleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameContains("Baggins");
+		List<EmployeeWithName> employees = repository.findByNameContains("Baggins");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryContainsWithSingleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameContains("Frodo");
+		List<EmployeeWithName> employees = repository.findByNameContains("Frodo");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactly("Frodo Baggins");
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactly("Frodo Baggins");
 	}
 
 	@Test
 	void derivedQueryContainsWithEmptyStringMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameContains("");
+		List<EmployeeWithName> employees = repository.findByNameContains("");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryContainsWithNullMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameContains(null);
+		List<EmployeeWithName> employees = repository.findByNameContains(null);
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).isEmpty();
+		assertThat(employees).extracting(EmployeeWithName::getName).isEmpty();
 	}
 
 	@Test
 	void derivedQueryLikeWithMultipleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameLike("%Baggins%");
+		List<EmployeeWithName> employees = repository.findByNameLike("%Baggins%");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 
 	@Test
 	void derivedQueryLikeWithSingleMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameLike("%Frodo%");
+		List<EmployeeWithName> employees = repository.findByNameLike("%Frodo%");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactly("Frodo Baggins");
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactly("Frodo Baggins");
 	}
 
 	@Test
 	void derivedQueryLikeWithEmptyStringMatch() {
 
-		List<EmployeeWithName> Employees = repository.findByNameLike("%%");
+		List<EmployeeWithName> employees = repository.findByNameLike("%%");
 
-		assertThat(Employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
+		assertThat(employees).extracting(EmployeeWithName::getName).containsExactlyInAnyOrder("Frodo Baggins",
 				"Bilbo Baggins");
 	}
 

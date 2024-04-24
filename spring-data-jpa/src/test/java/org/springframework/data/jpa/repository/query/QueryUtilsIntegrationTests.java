@@ -253,7 +253,7 @@ class QueryUtilsIntegrationTests {
 	@Test // DATAJPA-476
 	void traversesPluralAttributeCorrectly() {
 
-		doInMerchantContext((emf) -> {
+		doInMerchantContext(emf -> {
 
 			CriteriaBuilder builder = emf.createEntityManager().getCriteriaBuilder();
 			CriteriaQuery<Merchant> query = builder.createQuery(Merchant.class);

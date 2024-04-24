@@ -41,12 +41,12 @@ class HqlQueryTransformer extends HqlQueryRenderer {
 
 	private final @Nullable String countProjection;
 
-	private @Nullable String primaryFromAlias = null;
+	private @Nullable String primaryFromAlias;
 
 	private List<JpaQueryParsingToken> projection = Collections.emptyList();
 	private boolean projectionProcessed;
 
-	private boolean hasConstructorExpression = false;
+	private boolean hasConstructorExpression;
 
 	private JpaQueryTransformerSupport transformerSupport;
 
@@ -127,11 +127,11 @@ class HqlQueryTransformer extends HqlQueryRenderer {
 
 				if (ctx.queryOrder() != null) {
 
-					NOSPACE(tokens);
+					nOSPACE(tokens);
 					tokens.add(TOKEN_COMMA);
 				} else {
 
-					SPACE(tokens);
+					sPACE(tokens);
 					tokens.add(TOKEN_ORDER_BY);
 				}
 
@@ -198,7 +198,7 @@ class HqlQueryTransformer extends HqlQueryRenderer {
 		}
 
 		if (ctx.limitClause() != null) {
-			SPACE(tokens);
+			sPACE(tokens);
 			tokens.addAll(visit(ctx.limitClause()));
 		}
 		if (ctx.offsetClause() != null) {
@@ -369,7 +369,7 @@ class HqlQueryTransformer extends HqlQueryRenderer {
 				}
 			}
 
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else {
 			tokens.addAll(selectionListTokens);

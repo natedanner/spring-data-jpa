@@ -54,7 +54,7 @@ public class PersistableWithIdClassPK implements Serializable {
 			return true;
 		}
 
-		if (obj == null || !(obj.getClass().equals(getClass()))) {
+		if (obj == null || !obj.getClass().equals(getClass())) {
 			return false;
 		}
 

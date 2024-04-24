@@ -101,7 +101,7 @@ public class JpaMetamodelMappingContext
 	 *
 	 * @author Oliver Gierke
 	 */
-	private static class Metamodels {
+	private static final class Metamodels {
 
 		private final Set<Metamodel> metamodels;
 

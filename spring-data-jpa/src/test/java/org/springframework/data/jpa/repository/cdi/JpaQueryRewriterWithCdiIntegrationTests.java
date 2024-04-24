@@ -49,7 +49,7 @@ import org.springframework.data.repository.cdi.Eager;
 class JpaQueryRewriterWithCdiIntegrationTests {
 
 	private static SeContainer container;
-	private static Log LOGGER = LogFactory.getLog(CdiExtensionIntegrationTests.class);
+	private static final Log LOGGER = LogFactory.getLog(CdiExtensionIntegrationTests.class);
 
 	private UserRepositoryWithRewriter repository;
 

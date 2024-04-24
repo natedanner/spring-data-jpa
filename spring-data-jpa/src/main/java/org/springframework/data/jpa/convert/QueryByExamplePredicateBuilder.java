@@ -129,7 +129,7 @@ public class QueryByExamplePredicateBuilder {
 
 		for (SingularAttribute attribute : type.getSingularAttributes()) {
 
-			String currentPath = !StringUtils.hasText(path) ? attribute.getName() : path + "." + attribute.getName();
+			String currentPath = StringUtils.hasText(path) ? path + "." + attribute.getName() : attribute.getName();
 
 			if (exampleAccessor.isIgnoredPath(currentPath)) {
 				continue;

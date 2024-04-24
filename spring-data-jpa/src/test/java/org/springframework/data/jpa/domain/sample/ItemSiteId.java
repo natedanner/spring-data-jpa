@@ -38,15 +38,18 @@ public class ItemSiteId implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ItemSiteId))
+		}
+		if (!(o instanceof ItemSiteId)) {
 			return false;
+		}
 
 		ItemSiteId that = (ItemSiteId) o;
 
-		if (item != null ? !item.equals(that.item) : that.item != null)
+		if (item != null ? !item.equals(that.item) : that.item != null) {
 			return false;
+		}
 		return site != null ? site.equals(that.site) : that.site == null;
 	}
 

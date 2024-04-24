@@ -92,7 +92,7 @@ class HibernateJpaParametersParameterAccessor extends JpaParametersParameterAcce
 	@Override
 	protected Object potentiallyUnwrap(Object parameterValue) {
 
-		return (parameterValue instanceof TypedParameterValue<?> typedParameterValue) //
+		return parameterValue instanceof TypedParameterValue<?> typedParameterValue //
 				? typedParameterValue.getValue() //
 				: parameterValue;
 	}

@@ -47,7 +47,7 @@ public class JpaEvaluationContextExtension implements EvaluationContextExtension
 		return root;
 	}
 
-	public static class JpaRootObject {
+	public static final class JpaRootObject {
 
 		private final EscapeCharacter character;
 

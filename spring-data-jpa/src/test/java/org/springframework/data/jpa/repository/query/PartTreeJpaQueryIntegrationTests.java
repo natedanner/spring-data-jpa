@@ -64,8 +64,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration("classpath:infrastructure.xml")
 class PartTreeJpaQueryIntegrationTests {
 
-	private static String PROPERTY = "h.target." + getQueryProperty();
-	private static Class<?> HIBERNATE_NATIVE_QUERY = org.hibernate.query.Query.class;
+	private static String property = "h.target." + getQueryProperty();
+	private static Class<?> hibernateNativeQuery = org.hibernate.query.Query.class;
 
 	@PersistenceContext EntityManager entityManager;
 
@@ -109,11 +109,11 @@ class PartTreeJpaQueryIntegrationTests {
 
 		Query query = jpaQuery.createQuery(getAccessor(queryMethod, new Object[] { "Matthews", PageRequest.of(0, 1) }));
 
-		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(HIBERNATE_NATIVE_QUERY))).endsWith("firstname=:param0");
+		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(hibernateNativeQuery))).endsWith("firstname=:param0");
 
 		query = jpaQuery.createQuery(getAccessor(queryMethod, new Object[] { null, PageRequest.of(0, 1) }));
 
-		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(HIBERNATE_NATIVE_QUERY))).endsWith("firstname is null");
+		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(hibernateNativeQuery))).endsWith("firstname is null");
 	}
 
 	@Test // DATAJPA-920
@@ -136,7 +136,7 @@ class PartTreeJpaQueryIntegrationTests {
 
 		Query query = jpaQuery.createQuery(getAccessor(queryMethod, new Object[] { "Matthews" }));
 
-		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(HIBERNATE_NATIVE_QUERY))).contains(".id from User as");
+		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(hibernateNativeQuery))).contains(".id from User as");
 	}
 
 	@Test // DATAJPA-1074, HHH-15432
@@ -147,7 +147,7 @@ class PartTreeJpaQueryIntegrationTests {
 
 		Query query = jpaQuery.createQuery(getAccessor(queryMethod, new Object[] {}));
 
-		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(HIBERNATE_NATIVE_QUERY))).endsWith("roles is empty");
+		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(hibernateNativeQuery))).endsWith("roles is empty");
 	}
 
 	@Test // DATAJPA-1074, HHH-15432
@@ -158,7 +158,7 @@ class PartTreeJpaQueryIntegrationTests {
 
 		Query query = jpaQuery.createQuery(getAccessor(queryMethod, new Object[] {}));
 
-		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(HIBERNATE_NATIVE_QUERY))).endsWith("roles is not empty");
+		assertThat(HibernateUtils.getHibernateQuery(query.unwrap(hibernateNativeQuery))).endsWith("roles is not empty");
 	}
 
 	@Test // DATAJPA-1074

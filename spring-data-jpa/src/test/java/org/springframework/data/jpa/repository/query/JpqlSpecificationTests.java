@@ -733,14 +733,13 @@ class JpqlSpecificationTests {
 	@Test
 	void theRest24() {
 
-		assertThatExceptionOfType(BadJpqlGrammarException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(BadJpqlGrammarException.class).isThrownBy(() ->
 			JpqlQueryParser.parseQuery("""
 					SELECT p.product_name
 					FROM Order o, IN(o.lineItems) l JOIN o.customer c
 					WHERE c.lastname = 'Smith' AND c.firstname = 'John'
 					ORDER BY o.quantity
-					""");
-		});
+					"""));
 	}
 
 	@Test

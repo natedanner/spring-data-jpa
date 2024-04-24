@@ -767,14 +767,13 @@ class EqlQueryRendererTests {
 	@Test
 	void orderByClauseThatIsNotReflectedInTheSelectClauseButAlsoHasAnInClauseInTheFromClause() {
 
-		assertThatExceptionOfType(BadJpqlGrammarException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(BadJpqlGrammarException.class).isThrownBy(() ->
 			assertQuery("""
 					SELECT p.product_name
 					FROM Order o, IN(o.lineItems) l JOIN o.customer c
 					WHERE c.lastname = 'Smith' AND c.firstname = 'John'
 					ORDER BY o.quantity
-					""");
-		});
+					"""));
 	}
 
 	@Test

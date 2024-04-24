@@ -47,17 +47,17 @@ import org.springframework.data.jpa.repository.query.QueryParameterSetter.NamedO
 class NamedOrIndexedQueryParameterSetterUnitTests {
 
 	private static final String EXCEPTION_MESSAGE = "mock exception";
-	private Function<JpaParametersParameterAccessor, Object> firstValueExtractor = args -> args.getValues()[0];
+	private final Function<JpaParametersParameterAccessor, Object> firstValueExtractor = args -> args.getValues()[0];
 	private JpaParametersParameterAccessor methodArguments;
 
-	private List<TemporalType> temporalTypes = asList(null, TIME);
-	private List<Parameter<?>> parameters = Arrays.<Parameter<?>> asList( //
+	private final List<TemporalType> temporalTypes = asList(null, TIME);
+	private final List<Parameter<?>> parameters = Arrays.asList( //
 			mock(ParameterExpression.class), //
 			new ParameterImpl("name", null), //
 			new ParameterImpl(null, 1) //
 	);
 
-	private SoftAssertions softly = new SoftAssertions();
+	private final SoftAssertions softly = new SoftAssertions();
 
 	@BeforeEach
 	void before() {

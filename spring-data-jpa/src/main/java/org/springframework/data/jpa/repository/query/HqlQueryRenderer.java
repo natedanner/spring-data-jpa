@@ -88,7 +88,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(cteContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -100,7 +100,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.addAll(visit(ctx.identifier()));
 		tokens.add(TOKEN_AS);
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 
 		if (ctx.NOT() != null) {
 			tokens.add(TOKEN_NOT);
@@ -155,7 +155,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(searchSpecificationContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -215,7 +215,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(identifierContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -303,7 +303,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.addAll(visit(ctx.orderByClause()));
 
 		if (ctx.limitClause() != null) {
-			SPACE(tokens);
+			sPACE(tokens);
 			tokens.addAll(visit(ctx.limitClause()));
 		}
 		if (ctx.offsetClause() != null) {
@@ -326,11 +326,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.entityWithJoins().forEach(entityWithJoinsContext -> {
 			tokens.addAll(visit(entityWithJoinsContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -341,11 +341,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.fromRoot()));
-		SPACE(tokens);
+		sPACE(tokens);
 
-		ctx.joinSpecifier().forEach(joinSpecifierContext -> {
-			tokens.addAll(visit(joinSpecifierContext));
-		});
+		ctx.joinSpecifier().forEach(joinSpecifierContext ->
+			tokens.addAll(visit(joinSpecifierContext)));
 
 		return tokens;
 	}
@@ -376,7 +375,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			if (ctx.variable() != null) {
 				tokens.addAll(visit(ctx.variable()));
 			}
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 		} else if (ctx.subquery() != null) {
 
 			if (ctx.LATERAL() != null) {
@@ -495,7 +494,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(assignmentContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -566,7 +565,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(simplePathContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		tokens.add(TOKEN_CLOSE_PAREN);
 
@@ -584,7 +583,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(valuesContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -600,7 +599,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(expressionContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		tokens.add(TOKEN_CLOSE_PAREN);
 
@@ -803,11 +802,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.selection().forEach(selectionContext -> {
 			tokens.addAll(visit(selectionContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -863,7 +862,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.OBJECT(), false));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.identifier()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -880,7 +879,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(predicateContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -953,7 +952,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.IN(), false));
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.path()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		if (ctx.variable() != null) {
@@ -973,11 +972,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.groupedItem().forEach(groupedItemContext -> {
 			tokens.addAll(visit(groupedItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -992,10 +991,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.sortedItem().forEach(sortedItemContext -> {
 			tokens.addAll(visit(sortedItemContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -1011,7 +1010,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(predicateContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -1179,10 +1178,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.add(TOKEN_OPEN_BRACE);
 			ctx.HEXLITERAL().forEach(terminalNode -> {
 				tokens.add(new JpaQueryParsingToken(terminalNode));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
+			cLIP(tokens);
 			tokens.add(TOKEN_CLOSE_BRACE);
 		}
 
@@ -1205,7 +1204,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(expressionOrPredicateContext));
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		tokens.add(TOKEN_CLOSE_PAREN);
 
@@ -1267,7 +1266,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.expression()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1302,7 +1301,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.expression(0)));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(new JpaQueryParsingToken(ctx.op, false));
 		tokens.addAll(visit(ctx.expression(1)));
 
@@ -1316,7 +1315,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.subquery()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1403,7 +1402,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(ctx.treatedPath()));
 
 			if (ctx.pathContinutation() != null) {
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.addAll(visit(ctx.pathContinutation()));
 			}
 		} else if (ctx.generalPathFragment() != null) {
@@ -1451,13 +1450,13 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.identifier()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 
 		ctx.simplePathElement().forEach(simplePathElementContext -> {
 			tokens.addAll(visit(simplePathElementContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 		});
-		SPACE(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -1493,9 +1492,8 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(new JpaQueryParsingToken(ctx.CASE()));
 		tokens.addAll(visit(ctx.expressionOrPredicate(0)));
 
-		ctx.caseWhenExpressionClause().forEach(caseWhenExpressionClauseContext -> {
-			tokens.addAll(visit(caseWhenExpressionClauseContext));
-		});
+		ctx.caseWhenExpressionClause().forEach(caseWhenExpressionClauseContext ->
+			tokens.addAll(visit(caseWhenExpressionClauseContext)));
 
 		if (ctx.ELSE() != null) {
 
@@ -1515,9 +1513,8 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(new JpaQueryParsingToken(ctx.CASE()));
 
-		ctx.caseWhenPredicateClause().forEach(caseWhenPredicateClauseContext -> {
-			tokens.addAll(visit(caseWhenPredicateClauseContext));
-		});
+		ctx.caseWhenPredicateClause().forEach(caseWhenPredicateClauseContext ->
+			tokens.addAll(visit(caseWhenPredicateClauseContext)));
 
 		if (ctx.ELSE() != null) {
 
@@ -1562,7 +1559,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.functionName()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_OPEN_PAREN);
 
 		if (ctx.functionArguments() != null) {
@@ -1574,7 +1571,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		if (ctx.pathContinutation() != null) {
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.addAll(visit(ctx.pathContinutation()));
 		}
 
@@ -1599,10 +1596,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
 		tokens.addAll(visit(ctx.functionName()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.subquery()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1649,10 +1646,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.expressionOrPredicate().forEach(expressionOrPredicateContext -> {
 			tokens.addAll(visit(expressionOrPredicateContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -1698,14 +1695,14 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		if (ctx.orderByClause() != null) {
 			tokens.addAll(visit(ctx.orderByClause()));
-			SPACE(tokens);
+			sPACE(tokens);
 		}
 
 		if (ctx.frameClause() != null) {
 			tokens.addAll(visit(ctx.frameClause()));
 		}
 
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1721,11 +1718,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.expression().forEach(expressionContext -> {
 			tokens.addAll(visit(expressionContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -1909,7 +1906,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.addAll(visit(ctx.expression()));
 		tokens.add(new JpaQueryParsingToken(ctx.AS()));
 		tokens.addAll(visit(ctx.castTarget()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -1931,8 +1928,8 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 				tokens.add(new JpaQueryParsingToken(terminalNode));
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
-			NOSPACE(tokens);
+			cLIP(tokens);
+			nOSPACE(tokens);
 
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
@@ -1957,7 +1954,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 			tokens.addAll(visit(ctx.expression(0)));
 			tokens.add(new JpaQueryParsingToken(ctx.FROM()));
 			tokens.addAll(visit(ctx.expression(1)));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.dateTimeFunction() != null) {
 
@@ -2071,11 +2068,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		tokens.addAll(visit(ctx.path()));
 		tokens.add(new JpaQueryParsingToken(ctx.AS()));
 		tokens.addAll(visit(ctx.simplePath()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		if (ctx.pathContinutation() != null) {
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.addAll(visit(ctx.pathContinutation()));
 		}
 
@@ -2149,7 +2146,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		tokens.add(TOKEN_OPEN_PAREN);
 		tokens.addAll(visit(ctx.predicate()));
-		NOSPACE(tokens);
+		nOSPACE(tokens);
 		tokens.add(TOKEN_CLOSE_PAREN);
 
 		return tokens;
@@ -2313,13 +2310,13 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.simplePath()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.subquery() != null) {
 
 			tokens.add(TOKEN_OPEN_PAREN);
 			tokens.addAll(visit(ctx.subquery()));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_CLOSE_PAREN);
 		} else if (ctx.parameter() != null) {
 			tokens.addAll(visit(ctx.parameter()));
@@ -2329,10 +2326,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 			ctx.expressionOrPredicate().forEach(expressionOrPredicateContext -> {
 				tokens.addAll(visit(expressionOrPredicateContext));
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_COMMA);
 			});
-			CLIP(tokens);
+			cLIP(tokens);
 
 			tokens.add(TOKEN_CLOSE_PAREN);
 		}
@@ -2408,7 +2405,7 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 		} else if (ctx.simplePath() != null) {
 
 			List<JpaQueryParsingToken> tokens = visit(ctx.simplePath());
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			return tokens;
 		} else {
 			return List.of();
@@ -2422,10 +2419,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.instantiationArgument().forEach(instantiationArgumentContext -> {
 			tokens.addAll(visit(instantiationArgumentContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -2493,11 +2490,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		List<JpaQueryParsingToken> tokens = new ArrayList<>();
 
-		if (ctx.prefix.getText().equals(":")) {
+		if (":".equals(ctx.prefix.getText())) {
 
 			tokens.add(TOKEN_COLON);
 			tokens.addAll(visit(ctx.identifier()));
-		} else if (ctx.prefix.getText().equals("?")) {
+		} else if ("?".equals(ctx.prefix.getText())) {
 
 			tokens.add(TOKEN_QUESTION_MARK);
 
@@ -2516,11 +2513,11 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.identifier().forEach(identifierContext -> {
 			tokens.addAll(visit(identifierContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		});
-		CLIP(tokens);
-		SPACE(tokens);
+		cLIP(tokens);
+		sPACE(tokens);
 
 		return tokens;
 	}
@@ -2547,10 +2544,10 @@ class HqlQueryRenderer extends HqlBaseVisitor<List<JpaQueryParsingToken>> {
 
 		ctx.reservedWord().forEach(reservedWordContext -> {
 			tokens.addAll(visit(reservedWordContext));
-			NOSPACE(tokens);
+			nOSPACE(tokens);
 			tokens.add(TOKEN_DOT);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}

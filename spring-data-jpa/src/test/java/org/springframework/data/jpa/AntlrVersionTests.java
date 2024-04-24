@@ -78,7 +78,7 @@ class AntlrVersionTests {
 				String[] exceptions) {
 
 			// static block
-			if (!name.equals("<clinit>")) {
+			if (!"<clinit>".equals(name)) {
 				return null;
 			}
 

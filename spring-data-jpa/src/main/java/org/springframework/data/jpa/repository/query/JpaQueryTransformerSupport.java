@@ -29,7 +29,7 @@ class JpaQueryTransformerSupport {
 			+ "aliases used in the select clause; If you really want to use something other than that for sorting, please use "
 			+ "JpaSort.unsafe(…)";
 
-	private Set<String> projectionAliases;
+	private final Set<String> projectionAliases;
 
 	JpaQueryTransformerSupport() {
 		this.projectionAliases = new HashSet<>();
@@ -67,13 +67,13 @@ class JpaQueryTransformerSupport {
 			tokens.add(new JpaQueryParsingToken(() -> generateOrderByArgument(primaryFromAlias, order)));
 
 			if (order.isIgnoreCase()) {
-				NOSPACE(tokens);
+				nOSPACE(tokens);
 				tokens.add(TOKEN_CLOSE_PAREN);
 			}
 			tokens.add(order.isDescending() ? TOKEN_DESC : TOKEN_ASC);
 			tokens.add(TOKEN_COMMA);
 		});
-		CLIP(tokens);
+		cLIP(tokens);
 
 		return tokens;
 	}
@@ -143,10 +143,6 @@ class JpaQueryTransformerSupport {
 		}
 
 		// If the Sort property starts with an alias
-		if (projectionAliases.stream().anyMatch(alias -> order.getProperty().startsWith(alias + "."))) {
-			return false;
-		}
-
-		return true;
+		return !projectionAliases.stream().anyMatch(alias -> order.getProperty().startsWith(alias + "."));
 	}
 }
